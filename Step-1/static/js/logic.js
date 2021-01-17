@@ -34,11 +34,11 @@ function circleColor(mag) {
   else {
     return "white"
   }
-}
+};
 
 // Function for circle size:
 function circleSize(magnitude) {
-    return magnitude * 10000
+    return magnitude * 20000
 };
 
 function createFeatures(earthquakeData) {
@@ -81,6 +81,13 @@ function createMap(earthquakes) {
       accessToken: API_KEY
     });
   
+    var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "dark-v10",
+      accessToken: API_KEY
+    });
+
     var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
@@ -91,7 +98,9 @@ function createMap(earthquakes) {
     // Define a baseMaps object to hold our base layers
     var baseMaps = {
       "Street Map": streetmap,
-      "Light Map": lightmap
+      "Light Map": lightmap, 
+      "Dark Map": darkmap
+
     };
   
     // Create overlay object to hold our overlay layer
@@ -99,9 +108,9 @@ function createMap(earthquakes) {
       "Earthquake locations": earthquakes
     };
   
-    // Create our map, giving it the streetmap and earthquakes layers to display on load
+    // Create our default map, giving it the streetmap and earthquakes layers to display on load
     var myMap = L.map("map", {
-        center: [36.998, -109.0452],
+        center: [36.998, -109.0452], // Four Corners, USA.
         zoom: 5,
         layers: [lightmap, earthquakes]
     });
