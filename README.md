@@ -10,7 +10,7 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ### Level 1: Basic Visualization
 
-![2-BasicMap](Step-1/Images/2-BasicMap.png)
+![2-BasicMap](Step-1/Images/4-BasicMap.png)
 
 
 
