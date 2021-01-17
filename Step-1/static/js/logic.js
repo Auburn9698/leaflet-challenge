@@ -11,26 +11,26 @@ d3.json(quakeURL, function(data) {
 
 // Function for circle color:
 function circleColor(mag) {
-  if (mag < 1) {
-    return "lightgray"
+  if (mag < 0) {
+    return "MidnightBlue"
   }
   else if (mag < 2) {
-    return "lightblue"
-  }
-  else if (mag < 3) {
-    return "lightgreen"
+    return "MediumBlue"
   }
   else if (mag < 4) {
-    return "yellow"
+    return "RoyalBlue"
   }
-  else if (mag < 5) {
-    return "orange"
-  } 
   else if (mag < 6) {
-    return "red"
+    return "DodgerBlue"
   }
-  else if (mag < 7) {
-    return "maroon"
+  else if (mag < 8) {
+    return "SkyBlue"
+  } 
+  else if (mag < 10) {
+    return "LightSkyBlue"
+  }
+  else if (mag < 12) {
+    return "LightBlue"
   }
   else {
     return "white"
@@ -57,7 +57,7 @@ function createFeatures(earthquakeData) {
         pointToLayer: function(feature, latlng) {
           return L.circle(latlng, {
             radius: circleSize(feature.properties.mag),
-            fillColor: circleColor(feature.properties.mag),
+            fillColor: circleColor(feature.geometry.coordinates[2]),
             fillOpacity: .5,
             color: "#000000",
             weight: .5,
