@@ -1,8 +1,9 @@
 // Store USGS URL for weekly data:
-var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+var quakeURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+var platesURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 
 // Perform a GET request to the query URL
-d3.json(queryURL, function(data) {
+d3.json(quakeURL, function(data) {
     // Once we get a response, send the data.features object to the createFeatures function
     console.log(data)
     createFeatures(data.features);
@@ -99,7 +100,7 @@ function createMap(earthquakes) {
     var baseMaps = {
       "Street Map": streetmap,
       "Light Map": lightmap, 
-      "Dark Map": darkmap
+      "Night Mode": darkmap
 
     };
   
