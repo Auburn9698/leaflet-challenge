@@ -10,6 +10,8 @@ The USGS is interested in building a new set of tools that will allow them visua
 
 ### Level 1: Basic Visualization
 
+Larger circles represent larger magnitude quakes.  Darker color represents a greater depth.
+
 ![2-BasicMap](Step-1/Images/4-BasicMap.png)
 
 
