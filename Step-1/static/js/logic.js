@@ -10,26 +10,26 @@ d3.json(quakeURL, function(data) {
 });
 
 // Function for circle color:
-function circleColor(mag) {
-  if (mag < 0) {
+function circleColor(depth) {
+  if (depth < 0) {
     return "MidnightBlue"
   }
-  else if (mag < 2) {
+  else if (depth < 2) {
     return "MediumBlue"
   }
-  else if (mag < 4) {
+  else if (depth < 4) {
     return "RoyalBlue"
   }
-  else if (mag < 6) {
+  else if (depth < 6) {
     return "DodgerBlue"
   }
-  else if (mag < 8) {
+  else if (depth < 8) {
     return "SkyBlue"
   } 
-  else if (mag < 10) {
+  else if (depth < 10) {
     return "LightSkyBlue"
   }
-  else if (mag < 12) {
+  else if (depth < 12) {
     return "LightBlue"
   }
   else {
