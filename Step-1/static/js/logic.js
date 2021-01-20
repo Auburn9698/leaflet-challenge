@@ -25,28 +25,28 @@ faultlines = new L.LayerGroup();
 // Function for circle color:
 function circleColor(depth) {
   if (depth < 0) {
-    return "MidnightBlue"
+    return "White"
   }
   else if (depth < 2) {
-    return "MediumBlue"
-  }
-  else if (depth < 4) {
-    return "RoyalBlue"
-  }
-  else if (depth < 6) {
-    return "DodgerBlue"
-  }
-  else if (depth < 8) {
-    return "SkyBlue"
-  } 
-  else if (depth < 10) {
-    return "LightSkyBlue"
-  }
-  else if (depth < 12) {
     return "LightBlue"
   }
+  else if (depth < 4) {
+    return "LightSkyBlue"
+  }
+  else if (depth < 6) {
+    return "SkyBlue"
+  }
+  else if (depth < 8) {
+    return "DodgerBlue"
+  } 
+  else if (depth < 10) {
+    return "RoyalBlue"
+  }
+  else if (depth < 12) {
+    return "MediumBlue"
+  }
   else {
-    return "white"
+    return "MidnightBlue"
   }
 };
 
@@ -136,7 +136,7 @@ function createMap(earthquakes) {
     legend.onAdd = function(myMap) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            depths = [-2,0, 2, 4, 6, 8, 10, 12],
+            depths = [0, 2, 4, 6, 8, 10, 12],
             labels = [];
 
         // Loop through our depth intervals and generate a label with a colored square for each interval
