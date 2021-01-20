@@ -9,6 +9,19 @@ d3.json(quakeURL, function(data) {
     createFeatures(data.features);
 });
 
+
+
+faultlines = new L.LayerGroup();
+ d3.json(platesURL, function(data) {
+  // Once we get a response, send the data.features object to the createFeatures function
+  console.log(data.features);
+  L.geoJSON(data ,{
+      color : "orange"
+      })
+      .addTo(faultlines);
+});
+
+
 // Function for circle color:
 function circleColor(depth) {
   if (depth < 0) {
@@ -48,7 +61,7 @@ function createFeatures(earthquakeData) {
     // Give each feature a popup describing the place and time of the earthquake
     function onEachFeature(feature, layer) {
       layer.bindPopup("<h3>" + feature.properties.place +
-        "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+        "</h3><hr><p>" + new Date(feature.properties.time) + "</p><p> Magnitude:" +  feature.properties.mag + ",  Depth: " + feature.geometry.coordinates[2] + "</p>");
     }
   
     // Create a GeoJSON layer containing the features array on the earthquakeData object
@@ -65,6 +78,7 @@ function createFeatures(earthquakeData) {
         },
         onEachFeature: onEachFeature
       });
+      
   
     // Sending our earthquakes layer to the createMap function
     createMap(earthquakes);
@@ -106,20 +120,40 @@ function createMap(earthquakes) {
   
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
-      "Earthquake locations": earthquakes
+      "Earthquake locations": earthquakes,
+      "Faultlines": faultlines
     };
   
     // Create our default map, giving it the streetmap and earthquakes layers to display on load
     var myMap = L.map("map", {
         center: [36.998, -109.0452], // Four Corners, USA.
         zoom: 5,
-        layers: [lightmap, earthquakes]
+        layers: [lightmap, earthquakes, faultlines]
     });
-  
+
+    // Now for our legend:
+    var legend = L.control({ position: 'bottomright', background: "#F0FFFF" });
+    legend.onAdd = function(myMap) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            depths = [-2,0, 2, 4, 6, 8, 10, 12],
+            labels = [];
+
+        // Loop through our depth intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < depths.length; i++) {
+            div.innerHTML +=
+                '<b style="background:' + circleColor(depths[i] + 1) + '">&nbsp;&nbsp;&nbsp;&nbsp;</b> ' +
+                depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
+        }
+        return div;
+    };
+    legend.addTo(myMap);
+
     // Create a layer control
     // Pass in our baseMaps and overlayMaps
     // Add the layer control to the map
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(myMap);
+    
   };
