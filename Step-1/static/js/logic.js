@@ -138,7 +138,10 @@ function createMap(earthquakes) {
         var div = L.DomUtil.create('div', 'info legend'),
             depths = [0, 2, 4, 6, 8, 10, 12],
             labels = [];
+            var legendInfo = "<h3>Depth(km)</h3>" 
 
+
+    div.innerHTML = legendInfo;
         // Loop through our depth intervals and generate a label with a colored square for each interval
         for (var i = 0; i < depths.length; i++) {
             div.innerHTML +=
