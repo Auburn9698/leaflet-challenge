@@ -27,22 +27,22 @@ function circleColor(depth) {
   if (depth < 0) {
     return "White"
   }
-  else if (depth < 2) {
+  else if (depth < 4) {
     return "LightBlue"
   }
-  else if (depth < 4) {
+  else if (depth < 8) {
     return "LightSkyBlue"
   }
-  else if (depth < 6) {
+  else if (depth < 12) {
     return "SkyBlue"
   }
-  else if (depth < 8) {
+  else if (depth < 16) {
     return "DodgerBlue"
   } 
-  else if (depth < 10) {
+  else if (depth < 20) {
     return "RoyalBlue"
   }
-  else if (depth < 12) {
+  else if (depth < 24) {
     return "MediumBlue"
   }
   else {
@@ -136,7 +136,7 @@ function createMap(earthquakes) {
     legend.onAdd = function(myMap) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            depths = [0, 2, 4, 6, 8, 10, 12],
+            depths = [0, 4, 8, 12, 16, 20, 24],
             labels = [];
             var legendInfo = "<h3>Depth(km)</h3>" 
 
